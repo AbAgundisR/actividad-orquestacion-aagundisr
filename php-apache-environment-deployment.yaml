@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: aagundis
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.27.0 (b0ed6a2c9)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: php-apache-environment
+  name: php-apache-environment
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      io.kompose.service: php-apache-environment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.27.0 (b0ed6a2c9)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: php-apache-environment
+    spec:
+      containers:
+        - image: php-apache-environment
+          name: php-apache
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/www/html/
+              name: php-apache-environment-claim0
+      restartPolicy: Always
+      volumes:
+        - name: php-apache-environment-claim0
+          persistentVolumeClaim:
+            claimName: php-apache-environment-claim0
+status: {}
