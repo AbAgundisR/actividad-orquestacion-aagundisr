@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS demo;
+
+USE demo;
+
+CREATE TABLE Reticula(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    semestre INT
+);

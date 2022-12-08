@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: aagundis
+  name: php
+  labels:
+    app: aagundis
+    tier: backend
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: aagundis
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: aagundis
+        tier: backend
+    spec:
+      containers:
+      - name: php
+        image: aagundis/apiphp
+        ports:
+          - containerPort: 80
+            protocol: TCP
